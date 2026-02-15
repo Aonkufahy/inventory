@@ -1,0 +1,13 @@
+<h2>Order History</h2>
+<div *ngIf="orders.length === 0">No orders found.</div>
+<div *ngFor="let order of orders" class="card mb-3">
+  <div class="card-body">
+    <h5>Order ID: {{ order.id }}</h5>
+    <p>Date: {{ order.createdAt }}</p> 
+    <ul>
+      <li *ngFor="let item of order.items">{{ item.productName }} - Quantity: {{ item.quantity }} - ${{ item.price * item.quantity }}</li>  <!-- Use items and item.productName -->
+    </ul>
+    <p>Total: ${{ getOrderTotal(order) }}</p>
+  </div>
+</div>
+<button class="btn btn-secondary" (click)="goBack()">Back to Products</button>

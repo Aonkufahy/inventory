@@ -1,0 +1,35 @@
+2026-02-03T14:00:54.555+03:00  INFO 18364 --- [main] c.e.inventory.InventoryApplication       : Starting InventoryApplication using Java 17.0.17 with PID 18364 (C:\Users\Own Kofahi\Downloads\inventory\inventory\target\classes started by Own Kofahi in C:\Users\Own Kofahi\Downloads\inventory\inventory)
+2026-02-03T14:00:54.557+03:00 DEBUG 18364 --- [main] c.e.inventory.InventoryApplication       : Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-02-03T14:00:54.558+03:00  INFO 18364 --- [main] c.e.inventory.InventoryApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-02-03T14:00:55.757+03:00  INFO 18364 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-03T14:00:55.850+03:00  INFO 18364 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 6 JPA repository interfaces.
+2026-02-03T14:00:56.758+03:00  INFO 18364 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-02-03T14:00:56.772+03:00  INFO 18364 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-03T14:00:56.772+03:00  INFO 18364 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-02-03T14:00:56.867+03:00  INFO 18364 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-03T14:00:56.867+03:00  INFO 18364 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2239 ms
+2026-02-03T14:00:56.984+03:00 ERROR 18364 --- [main] o.s.b.web.embedded.tomcat.TomcatStarter  : Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtAuthenticationFilter' defined in file [C:\Users\Own Kofahi\Downloads\inventory\inventory\target\classes\com\example\inventory\config\JwtAuthenticationFilter.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'customUserDetailsService' defined in file [C:\Users\Own Kofahi\Downloads\inventory\inventory\target\classes\com\example\inventory\security\CustomUserDetailsService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in com.example.inventory.repository.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaSharedEM_entityManagerFactory' while setting bean property 'entityManager'
+2026-02-03T14:00:57.030+03:00  INFO 18364 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-02-03T14:00:57.038+03:00  WARN 18364 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2026-02-03T14:00:57.049+03:00  INFO 18364 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-02-03T14:00:57.071+03:00 ERROR 18364 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'spring.jpa.show-sql' to boolean:
+
+    Property: spring.jpa.show-sql
+    Value: "true  # Shows SQL queries in logs"
+    Origin: class path resource [application.properties] - 9:21
+    Reason: failed to convert java.lang.String to boolean (caused by java.lang.IllegalArgumentException: Invalid boolean value 'true  # Shows SQL queries in logs')
+
+Action:
+
+Update your application's configuration
+

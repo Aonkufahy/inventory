@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/products">{{ title }}</a>
+    <div class="navbar-nav ms-auto">
+      <div *ngIf="currentUser$ | async as user; else notLoggedIn">
+        <span class="navbar-text me-3">Welcome, {{ user.username }} ({{ user.role }})</span>
+        
+       
+<a *ngIf="authService.isAdmin()" class="nav-link d-inline" routerLink="/admin">Admin Panel</a>
+        <a class="nav-link d-inline" routerLink="/orders">Orders</a>
+        <button *ngIf="authService.isAuthenticated()" class="btn btn-outline-danger ms-2" (click)="logout()">Logout</button>
+      </div>
+      <ng-template #notLoggedIn>
+        <a class="nav-link" routerLink="/login">Login</a>
+        <a class="nav-link" routerLink="/register">Register</a>
+      </ng-template>
+    </div>
+  </div>
+</nav>
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

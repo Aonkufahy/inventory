@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>Admin - Manage Products</h2>
+
+
+  <div class="card mb-4">
+    <div class="card-header">Add New Product</div>
+    <div class="card-body">
+      <form (ngSubmit)="addProduct()">
+        <div class="form-group mb-2">
+          <label for="category">Category</label>
+          <select class="form-control" id="category" [(ngModel)]="selectedCategoryId" name="category" required>
+            <option value="1">Category 1</option>
+            <option value="2">Category 2</option>
+          </select>
+        </div>
+        <div class="form-group mb-2">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="newProduct.name" name="name" required>
+        </div>
+        <div class="form-group mb-2">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" [(ngModel)]="newProduct.description" name="description"></textarea>
+        </div>
+        <div class="form-group mb-2">
+          <label for="price">Price</label>
+          <input type="number" class="form-control" id="price" [(ngModel)]="newProduct.price" name="price" required>
+        </div>
+        <div class="form-group mb-2">
+          <label for="quantity">Quantity</label>
+          <input type="number" class="form-control" id="quantity" [(ngModel)]="newProduct.quantity" name="quantity" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Product List with Edit/Delete -->
+  <div class="card">
+    <div class="card-header">Product List</div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td *ngIf="editingProduct?.id !== product.id">{{ product.name }}</td>
+            <td *ngIf="editingProduct?.id === product.id">
+              <input type="text" [(ngModel)]="editingProduct!.name" name="editName" class="form-control">
+            </td>
+            <td *ngIf="editingProduct?.id !== product.id">{{ product.description }}</td>
+            <td *ngIf="editingProduct?.id === product.id">
+              <textarea [(ngModel)]="editingProduct!.description" name="editDescription" class="form-control"></textarea>
+            </td>
+            <td *ngIf="editingProduct?.id !== product.id">{{ product.price }}</td>
+            <td *ngIf="editingProduct?.id === product.id">
+              <input type="number" [(ngModel)]="editingProduct!.price" name="editPrice" class="form-control">
+            </td>
+            <td *ngIf="editingProduct?.id !== product.id">{{ product.quantity }}</td>
+            <td *ngIf="editingProduct?.id === product.id">
+              <input type="number" [(ngModel)]="editingProduct!.quantity" name="editQuantity" class="form-control">
+            </td>
+            <td>
+              <button *ngIf="editingProduct?.id !== product.id" class="btn btn-warning btn-sm" (click)="editProduct(product)">Edit</button>
+              <button *ngIf="editingProduct?.id === product.id" class="btn btn-success btn-sm" (click)="saveEdit()">Save</button>
+              <button *ngIf="editingProduct?.id === product.id" class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id!)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<h2>Checkout</h2>
+<div *ngIf="cart$ | async as cart">
+  <ul>
+    <li *ngFor="let item of cart.items">{{ item.product.name }} - Quantity: {{ item.quantity }} - ${{ item.product.price * item.quantity }}</li>
+  </ul>
+  <p>Total: ${{ total }}</p>
+  <button class="btn btn-success" (click)="placeOrder()" [disabled]="isPlacingOrder || cart.items.length === 0">Place Order</button>
+  <button class="btn btn-secondary ms-2" (click)="goBack()">Back to Products</button>
+</div>

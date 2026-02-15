@@ -1,0 +1,81 @@
+2026-02-03T13:59:42.214+03:00 ERROR 12980 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.org.springframework.security' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.org.springframework.security
+    Value: "DEBUG  # Logs auth issues"
+    Origin: class path resource [application.properties] - 21:44
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.DEBUG  # Logs auth issues)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2026-02-03T13:59:54.484+03:00 ERROR 18368 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.org.springframework.security' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.org.springframework.security
+    Value: "DEBUG  # Logs auth issues"
+    Origin: class path resource [application.properties] - 21:44
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.DEBUG  # Logs auth issues)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2026-02-03T14:01:50.289+03:00 ERROR 10396 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.org.springframework.security' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.org.springframework.security
+    Value: "DEBUG  # Logs auth issues"
+    Origin: class path resource [application.properties] - 22:44
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.DEBUG  # Logs auth issues)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+

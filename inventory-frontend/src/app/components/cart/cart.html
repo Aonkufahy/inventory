@@ -1,0 +1,11 @@
+<h2>Shopping Cart</h2>
+<div *ngIf="cart$ | async as cart">
+  <div *ngFor="let item of cart.items" class="mb-3">
+    <h5>{{ item.product.name }}</h5>
+    <p>Quantity: {{ item.quantity }}</p>
+    <p>Price: ${{ item.product.price * item.quantity }}</p>
+    <button class="btn btn-danger" (click)="removeFromCart(item.product.id!)">Remove</button> 
+  </div>
+  <p>Total: ${{ getTotal(cart) }}</p>
+  <button class="btn btn-primary" (click)="checkout()">Checkout</button>
+</div>

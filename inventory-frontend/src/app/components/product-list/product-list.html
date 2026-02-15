@@ -1,0 +1,23 @@
+<h2>Product List</h2>
+<div class="mb-3">
+  <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search products" (input)="onSearch()">
+</div>
+<div class="row">
+  <div class="col-md-4" *ngFor="let product of products">
+    <div class="card">
+      <div class="card-body">
+        <h5>{{ product.name }}</h5>
+        <p>{{ product.description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <p>Quantity: {{ product.quantity }}</p>
+        <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button>
+        <button *ngIf="authService.isAdmin()" class="btn btn-warning ms-2" [routerLink]="['/products/edit', product.id!]">Edit</button>
+        <button *ngIf="authService.isAdmin()" class="btn btn-danger ms-2" (click)="deleteProduct(product.id!)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mt-3">
+  <button class="btn btn-secondary" (click)="prevPage()" [disabled]="page === 0">Previous</button>
+  <button *ngIf="!authService.isAdmin()" class="btn btn-primary" (click)="goToCheckout()" [disabled]="!cartHasItems">Go to Checkout</button>
+</div>
