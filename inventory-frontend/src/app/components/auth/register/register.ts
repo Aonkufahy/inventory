@@ -10,7 +10,7 @@ import { User } from '../../../models/user';
   standalone: false
 })
 export class RegisterComponent {
-  user: User = { username: '', password: '', email: '', role: 'USER' }; // added email
+  user: User = { username: '', password: '', email: '', role: 'USER' }; 
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}

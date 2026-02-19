@@ -24,9 +24,11 @@ public class Product {
     @PositiveOrZero(message = "Quantity cannot be negative")
     private int quantity;
 
+    // ADD THIS FIELD
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonIgnore
     private Category category;
-
 }

@@ -1,12 +1,12 @@
 export interface Order {
   id: number;
-  createdAt: string;  // Use createdAt instead of orderDate
+  createdAt: string;  
   totalAmount: number;
-  items: OrderItem[];  // Use items instead of orderItems
+  items: OrderItem[];  
 }
 
 export interface OrderItem {
-  productName: string;  // Direct field
-  price: number;  // Direct field
+  productName: string;  
+  price: number;  
   quantity: number;
 }

@@ -78,7 +78,7 @@ public class UserCartService {
         order.setTotalAmount(total);
         orderRepository.save(order);
 
-        cartRepository.delete(cart); // clear cart
+        cartRepository.delete(cart);
 
         return order;
     }

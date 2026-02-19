@@ -15,18 +15,18 @@ export class ApiService {
 
  private getHeaders(): HttpHeaders {
   const token = localStorage.getItem('token');
-  console.log('Token from localStorage:', token);  // Debug
+  console.log('Token from localStorage:', token);  
   let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   if (token) {
     headers = headers.set('Authorization', `Bearer ${token}`);
-    console.log('Authorization header set:', `Bearer ${token}`);  // Debug
+    console.log('Authorization header set:', `Bearer ${token}`);  
   } else {
-    console.log('No token found');  // Debug
+    console.log('No token found');  
   }
   return headers;
 }
 
-  // User methods
+  
   getProducts(search?: string, page: number = 0, size: number = 10): Observable<{ content: Product[]; totalElements: number }> {
     let params = new HttpParams().set('page', page.toString()).set('size', size.toString());
     if (search) params = params.set('search', search);
@@ -37,7 +37,7 @@ export class ApiService {
     return this.http.get<Product>(`${this.baseUrl}/products/${id}`, { headers: this.getHeaders() });
   }
 
-  // Admin methods
+  
   getAdminProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.baseUrl}/admin/products`, { headers: this.getHeaders() });
   }
@@ -54,7 +54,7 @@ export class ApiService {
     return this.http.delete<void>(`${this.baseUrl}/admin/products/${id}`, { headers: this.getHeaders() });
   }
 
-  // Other methods
+  
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.baseUrl}/categories`, { headers: this.getHeaders() });
   }
@@ -65,8 +65,8 @@ export class ApiService {
 
   checkout(order: { items: any[] }): Observable<Order> {
   const headers = this.getHeaders();
-  console.log('Checkout headers:', headers);  // Debug
-  console.log('Checkout URL:', `${this.baseUrl}/orders/checkout`);  // Debug
+  console.log('Checkout headers:', headers);  
+  console.log('Checkout URL:', `${this.baseUrl}/orders/checkout`);  
   return this.http.post<Order>(`${this.baseUrl}/orders/checkout`, order, { headers });
 }
 }

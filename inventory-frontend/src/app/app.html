@@ -5,8 +5,7 @@
       <div *ngIf="currentUser$ | async as user; else notLoggedIn">
         <span class="navbar-text me-3">Welcome, {{ user.username }} ({{ user.role }})</span>
         
-       
-<a *ngIf="authService.isAdmin()" class="nav-link d-inline" routerLink="/admin">Admin Panel</a>
+        <a *ngIf="authService.isAdmin()" class="nav-link d-inline me-3" routerLink="/admin">Admin Panel</a>
         <a class="nav-link d-inline" routerLink="/orders">Orders</a>
         <button *ngIf="authService.isAuthenticated()" class="btn btn-outline-danger ms-2" (click)="logout()">Logout</button>
       </div>

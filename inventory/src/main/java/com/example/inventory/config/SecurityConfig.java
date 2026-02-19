@@ -59,13 +59,16 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/register/user").permitAll()
                         .requestMatchers("/api/products").hasRole("USER")
-                        .requestMatchers("/api/products/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/products/**").hasRole("ADMIN")
                         .requestMatchers("/api/cart/**").hasRole("USER")
+                        .requestMatchers("/uploads/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
-        // Removed contentLengthFilter to avoid response commitment issues
+
         return http.build();
     }
 

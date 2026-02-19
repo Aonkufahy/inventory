@@ -108,14 +108,14 @@ public class OrderController {
 
         List<Order> orders;
 
-        // ✅ If admin → get all orders
+
         if (authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
 
             orders = orderRepository.findAll();
 
         } else {
-            // ✅ If normal user → only their orders
+
             orders = orderRepository.findByUser(user);
         }
 

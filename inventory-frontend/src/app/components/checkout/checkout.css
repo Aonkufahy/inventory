@@ -45,6 +45,20 @@
   font-size: 18px;
   transition: background 0.3s;
 }
+.btn-clear-cart {
+  border-radius: 20px; /* Rounded pill style */
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-clear-cart:hover {
+  background-color: #dc3545;
+  color: white;
+  transform: scale(1.05); /* Slight pop on hover */
+  margin-right: 10px;
+}
+
 
 .place-order-btn:hover {
   background: #0056b3;

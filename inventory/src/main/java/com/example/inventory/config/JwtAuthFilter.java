@@ -37,7 +37,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         final String userEmail;
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            System.out.println("No Bearer token for " + requestURI);  // Log missing token
+            System.out.println("No Bearer token for " + requestURI);
             filterChain.doFilter(request, response);
             return;
         }

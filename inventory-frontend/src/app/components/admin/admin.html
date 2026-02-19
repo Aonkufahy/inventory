@@ -1,80 +1,106 @@
-<div class="container">
-  <h2>Admin - Manage Products</h2>
+<div class="row g-0 vh-100">
+  
+  <!-- Left Side: Current Products Gallery (Baby Blue #F0FFFF) -->
+  <div class="col-md-7 p-4 scrollable-panel" style="background-color: #F0FFFF;">
+    <h3 class="mb-4">Live Catalog 🏷️</h3>
+    
+    <div class="row row-cols-1 row-cols-lg-2 g-3">
+      <div class="col" *ngFor="let product of products">
+        <div class="card h-100 border-0 shadow-sm product-preview-card">
+          <div class="d-flex align-items-center p-3">
+            <input type="file" #fileInput (change)="onFileSelected($event)" class="form-control" accept="image/*">
 
+<img [src]="product.imageUrl ? 'http://localhost:8080/uploads/' + product.imageUrl : 'https://placehold.co'" 
+     class="rounded border me-3" 
+     style="width: 70px; height: 70px; object-fit: cover;">
 
-  <div class="card mb-4">
-    <div class="card-header">Add New Product</div>
-    <div class="card-body">
-      <form (ngSubmit)="addProduct()">
-        <div class="form-group mb-2">
-          <label for="category">Category</label>
-          <select class="form-control" id="category" [(ngModel)]="selectedCategoryId" name="category" required>
+            <div class="flex-grow-1">
+              <h6 class="mb-0 fw-bold text-truncate" style="max-width: 150px;">{{ product.name }}</h6>
+              <div class="text-primary fw-bold small">${{ product.price }}</div>
+              <small class="text-muted d-block">Stock: {{ product.quantity }}</small>
+            </div>
+            
+            <!-- ACTION BUTTONS -->
+            <div class="d-flex flex-column gap-1">
+              <button class="btn btn-sm btn-outline-primary" (click)="editProduct(product)">
+                Edit
+              </button>
+              <!-- NEW: Quick Delete Button -->
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteProduct(product.id!)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Add/Edit Product Form -->
+  <div class="col-md-5 bg-white shadow-lg scrollable-panel border-start">
+    <div class="p-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">{{ editingProduct ? 'Edit Product' : 'Add Product' }}</h2>
+  
+      </div>
+
+      <form (ngSubmit)="editingProduct ? saveEdit() : addProduct()">
+        <!-- Shared Form Fields -->
+        <div class="mb-3">
+          <label class="small fw-bold">Name</label>
+          <input type="text" class="form-control" [(ngModel)]="(editingProduct || newProduct).name" name="name" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="small fw-bold">Category</label>
+          <select class="form-select" [(ngModel)]="selectedCategoryId" name="category">
             <option value="1">Category 1</option>
             <option value="2">Category 2</option>
           </select>
         </div>
-        <div class="form-group mb-2">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" [(ngModel)]="newProduct.name" name="name" required>
+
+        <div class="mb-3">
+          <label class="small fw-bold">Description</label>
+          <textarea class="form-control" [(ngModel)]="(editingProduct || newProduct).description" name="description" rows="3"></textarea>
         </div>
-        <div class="form-group mb-2">
-          <label for="description">Description</label>
-          <textarea class="form-control" id="description" [(ngModel)]="newProduct.description" name="description"></textarea>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="small fw-bold">Price</label>
+            <input type="number" class="form-control" [(ngModel)]="(editingProduct || newProduct).price" name="price" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="small fw-bold">Quantity</label>
+            <input type="number" class="form-control" [(ngModel)]="(editingProduct || newProduct).quantity" name="quantity" required>
+          </div>
         </div>
-        <div class="form-group mb-2">
-          <label for="price">Price</label>
-          <input type="number" class="form-control" id="price" [(ngModel)]="newProduct.price" name="price" required>
+
+        <div class="mb-4">
+          <label class="small fw-bold">Image Upload</label>
+          <input type="file" class="form-control"  accept="image/*">
         </div>
-        <div class="form-group mb-2">
-          <label for="quantity">Quantity</label>
-          <input type="number" class="form-control" id="quantity" [(ngModel)]="newProduct.quantity" name="quantity" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Product</button>
+
+     <div class="d-grid gap-2">
+  <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+    {{ editingProduct ? 'Update Product' : 'Create Product' }}
+  </button>
+  
+  <!-- IMPORTANT: Ensure type="button" is here so it doesn't trigger the form -->
+  <button *ngIf="editingProduct" type="button" class="btn btn-light" (click)="cancelEdit()">
+    Cancel
+  </button>
+</div>
+
       </form>
+
+      <!-- Delete Section (Kept for Edit Mode Safety) -->
+      <div *ngIf="editingProduct" class="mt-5 pt-4 border-top text-center">
+        <p class="text-muted small mb-3">Need to remove this permanently?</p>
+        <button class="btn btn-danger w-100" (click)="deleteProduct(editingProduct.id!)">
+          Delete Product
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Product List with Edit/Delete -->
-  <div class="card">
-    <div class="card-header">Product List</div>
-    <div class="card-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products">
-            <td *ngIf="editingProduct?.id !== product.id">{{ product.name }}</td>
-            <td *ngIf="editingProduct?.id === product.id">
-              <input type="text" [(ngModel)]="editingProduct!.name" name="editName" class="form-control">
-            </td>
-            <td *ngIf="editingProduct?.id !== product.id">{{ product.description }}</td>
-            <td *ngIf="editingProduct?.id === product.id">
-              <textarea [(ngModel)]="editingProduct!.description" name="editDescription" class="form-control"></textarea>
-            </td>
-            <td *ngIf="editingProduct?.id !== product.id">{{ product.price }}</td>
-            <td *ngIf="editingProduct?.id === product.id">
-              <input type="number" [(ngModel)]="editingProduct!.price" name="editPrice" class="form-control">
-            </td>
-            <td *ngIf="editingProduct?.id !== product.id">{{ product.quantity }}</td>
-            <td *ngIf="editingProduct?.id === product.id">
-              <input type="number" [(ngModel)]="editingProduct!.quantity" name="editQuantity" class="form-control">
-            </td>
-            <td>
-              <button *ngIf="editingProduct?.id !== product.id" class="btn btn-warning btn-sm" (click)="editProduct(product)">Edit</button>
-              <button *ngIf="editingProduct?.id === product.id" class="btn btn-success btn-sm" (click)="saveEdit()">Save</button>
-              <button *ngIf="editingProduct?.id === product.id" class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id!)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>

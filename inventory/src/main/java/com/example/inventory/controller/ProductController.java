@@ -38,7 +38,7 @@ public class ProductController {
         return productRepository.findById(id).orElseThrow();
     }
 
-    @PostMapping
+    @PostMapping("/{categoryId}")
     @PreAuthorize("hasRole('ADMIN')")
     public Product createProduct(@RequestBody Product product) {
         return productRepository.save(product);

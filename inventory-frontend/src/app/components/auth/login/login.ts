@@ -14,12 +14,21 @@ export class LoginComponent {
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+login(): void {
+  this.authService.login(this.credentials).subscribe({
+    next: () => {
+      
+      if (this.authService.isAdmin()) {
+        this.router.navigate(['/admin']);
+      } else {
+        this.router.navigate(['/products']);
+      }
+    },
+    error: (err) => {
+      this.errorMessage = 'Invalid credentials';
+    }
+  });
+}
 
-  login(): void {
-    this.authService.login(this.credentials).subscribe({
-      next: () => this.router.navigate(['/products']),
-      error: (err) => this.errorMessage = 'Invalid credentials'
-    });
-  }
  
 }

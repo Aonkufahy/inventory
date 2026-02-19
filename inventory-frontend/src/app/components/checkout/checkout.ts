@@ -63,7 +63,10 @@ export class CheckoutComponent implements OnInit {
       }
     );
   }
-
+    clearCart():void{
+    this.cartService.clearCart();
+    console.log('Cart cleared'); 
+  }
   private handleSuccess(): void {
     this.cartService.clearCart();
     console.log('Cart cleared, navigating to /orders'); 

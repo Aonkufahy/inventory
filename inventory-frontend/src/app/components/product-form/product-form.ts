@@ -37,7 +37,11 @@ export class ProductFormComponent implements OnInit {
     if (this.isEdit) {
       this.apiService.updateProduct(this.product.id!, this.product).subscribe(() => this.router.navigate(['/products']));
     } else {
-      this.apiService.addProduct(this.product.categoryId,this.product).subscribe(() => this.router.navigate(['/products']));
+      // Add 'null' as the 3rd argument to satisfy the new Service signature
+this.apiService.addProduct(this.product.categoryId, this.product).subscribe(
+  () => this.router.navigate(['/products'])
+);
+
     }
   }
 }
