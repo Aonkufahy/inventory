@@ -54,6 +54,7 @@ export class CartService {
     cart.items = cart.items.filter(item => item.product.id !== productId);
     this.saveCart(cart);
   }
+  
 
   clearCart(): void {
     if (this.currentUserId) {

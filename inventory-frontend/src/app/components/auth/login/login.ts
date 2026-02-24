@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Add OnInit
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth';
 import { AuthGuard } from '../../../guards/auth-guard';
@@ -7,28 +7,33 @@ import { AuthGuard } from '../../../guards/auth-guard';
   selector: 'app-login',
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
-  standalone:false
+  standalone: false
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit { 
   credentials = { username: '', password: '' };
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
-login(): void {
-  this.authService.login(this.credentials).subscribe({
-    next: () => {
-      
-      if (this.authService.isAdmin()) {
-        this.router.navigate(['/admin']);
-      } else {
-        this.router.navigate(['/products']);
-      }
-    },
-    error: (err) => {
-      this.errorMessage = 'Invalid credentials';
-    }
-  });
-}
 
- 
+  
+  ngOnInit() {
+    
+    this.authService.logout(); 
+
+  }
+
+  login(): void {
+    this.authService.login(this.credentials).subscribe({
+      next: () => {
+        if (this.authService.isAdmin()) {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/products']);
+        }
+      },
+      error: (err) => {
+        this.errorMessage = 'Invalid credentials';
+      }
+    });
+  }
 }

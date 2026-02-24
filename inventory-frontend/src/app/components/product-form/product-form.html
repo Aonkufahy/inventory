@@ -1,26 +1,98 @@
 <h2>{{ isEdit ? 'Edit' : 'Add' }} Product</h2>
-<form (ngSubmit)="saveProduct()">
+
+<form (ngSubmit)="saveProduct()" enctype="multipart/form-data">
+  
+  <!-- Name -->
   <div class="mb-3">
-    <label>Name</label>
-    <input type="text" class="form-control" [(ngModel)]="product.name" name="name" required>
+    <label>Name *</label>
+    <input type="text" 
+           class="form-control" 
+           [(ngModel)]="product.name" 
+           name="name" 
+           required
+           placeholder="Enter product name">
   </div>
+
+  <!-- Description -->
   <div class="mb-3">
     <label>Description</label>
-    <textarea class="form-control" [(ngModel)]="product.description" name="description"></textarea>
+    <textarea class="form-control" 
+              [(ngModel)]="product.description" 
+              name="description"
+              rows="3"
+              placeholder="Enter product description"></textarea>
   </div>
+
+  <!-- Price -->
   <div class="mb-3">
-    <label>Price</label>
-    <input type="number" class="form-control" [(ngModel)]="product.price" name="price" required>
+    <label>Price *</label>
+    <input type="number" 
+           class="form-control" 
+           [(ngModel)]="product.price" 
+           name="price" 
+           required
+           min="0"
+           step="0.01"
+           placeholder="0.00">
   </div>
+
+  <!-- Quantity -->
   <div class="mb-3">
-    <label>Quantity</label>
-    <input type="number" class="form-control" [(ngModel)]="product.quantity" name="quantity" required>
+    <label>Quantity *</label>
+    <input type="number" 
+           class="form-control" 
+           [(ngModel)]="product.quantity" 
+           name="quantity" 
+           required
+           min="0"
+           placeholder="0">
   </div>
+
+  <!-- Category ID -->
   <div class="mb-3">
-    <label>Category ID</label>
-    <input type="number" class="form-control" [(ngModel)]="product.categoryId" name="categoryId" required>
+    <label>Category ID *</label>
+    <input type="number" 
+           class="form-control" 
+           [(ngModel)]="product.categoryId" 
+           name="categoryId" 
+           required
+           min="1"
+           placeholder="1">
   </div>
- <button type="submit" class="btn btn-success">Save</button>
- 
-<a routerLink="/products" class="btn btn-secondary">Cancel</a>
+
+  <!-- Image Upload -->
+  <div class="mb-3">
+    <label>Product Image</label>
+    <input type="file" 
+           class="form-control" 
+           (change)="onFileSelected($event)"
+           accept="image/*">
+    
+    <!-- Image Preview -->
+    <div *ngIf="previewUrl" class="mt-2">
+      <img [src]="previewUrl" 
+           alt="Product preview" 
+           class="img-thumbnail"
+           style="max-width: 200px; border: 2px solid #ddd; padding: 5px;">
+      <p class="text-muted mt-1"><small>Preview</small></p>
+    </div>
+    
+    <!-- No image message -->
+    <p *ngIf="!previewUrl" class="text-muted mt-2">
+      <small>No image selected. Upload an image to see preview.</small>
+    </p>
+  </div>
+
+  <!-- Buttons -->
+  <div class="mb-3">
+    <button type="submit" 
+            class="btn btn-success me-2" 
+            [disabled]="isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+      {{ isLoading ? 'Saving...' : 'Save' }}
+    </button>
+
+    <a routerLink="/products" class="btn btn-secondary">Cancel</a>
+  </div>
+
 </form>

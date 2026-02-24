@@ -1,29 +1,334 @@
-.scrollable-panel {
+/* Container for the right scrollable panel */
+.overflow-y-auto {
     height: 100vh;
     overflow-y: auto;
-    -ms-overflow-style: none;  /* Hide scrollbar for IE/Edge */
-    scrollbar-width: none;     /* Hide scrollbar for Firefox */
+    overflow-x: hidden;
 }
 
-/* Optional: Show scrollbar on hover */
-.scrollable-panel:hover {
-    scrollbar-width: thin;
+/* Custom Scrollbar to match your #F0FFFF theme */
+.overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
 }
 
-.scrollable-panel::-webkit-scrollbar {
-    width: 6px;
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: #f8f9fa;
 }
 
-.scrollable-panel::-webkit-scrollbar-thumb {
-    background: #d1eeee;
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #d1eeee; /* Slightly darker shade of your baby blue for visibility */
     border-radius: 10px;
 }
 
-.product-preview-card {
-    transition: transform 0.2s, box-shadow 0.2s;
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #b8d8d8; /* Darker on hover */
 }
 
-.product-preview-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+/* Main admin container */
+.admin-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 15px;
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #ffffff;
+    border-bottom: 2px solid #d1eeee;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 15px 20px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Form Styling */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 10px 15px;
+    transition: all 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #d1eeee;
+    box-shadow: 0 0 0 0.2rem rgba(209, 238, 238, 0.25);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #495057;
+}
+
+/* List Group Styling */
+.list-group-item {
+    border-color: rgba(0,0,0,0.05);
+    border-radius: 10px !important;
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f0ffff;
+}
+
+/* Badge Styling */
+.badge {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.badge.bg-primary {
+    background-color: #d1eeee !important;
+    color: #2c3e50;
+}
+
+.badge.bg-success {
+    background-color: #d4edda !important;
+    color: #155724;
+}
+
+.badge.bg-warning {
+    background-color: #fff3cd !important;
+    color: #856404;
+}
+
+/* Button Styling */
+.btn {
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #d1eeee;
+    color: #2c3e50;
+}
+
+.btn-primary:hover {
+    background-color: #b8d8d8;
+    color: #2c3e50;
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.btn-success:hover {
+    background-color: #c3e6cb;
+    color: #155724;
+}
+
+.btn-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.btn-warning:hover {
+    background-color: #ffe69c;
+    color: #856404;
+}
+
+.btn-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.btn-danger:hover {
+    background-color: #f5c6cb;
+    color: #721c24;
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    font-size: 0.875rem;
+}
+
+/* Table Styling */
+.table {
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table thead th {
+    background-color: #f0ffff;
+    border-bottom: 2px solid #d1eeee;
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 15px;
+}
+
+.table td {
+    padding: 15px;
+    vertical-align: middle;
+    border-color: #f0f0f0;
+}
+
+.table tbody tr:hover {
+    background-color: #f0ffff;
+}
+
+/* Product Image in Table */
+.table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #d1eeee;
+    transition: transform 0.2s;
+}
+
+.table img:hover {
+    transform: scale(1.5);
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    background-color: #f0ffff;
+    border-bottom: 2px solid #d1eeee;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+}
+
+.modal-header .modal-title {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 20px;
+}
+
+/* File Input Styling */
+input[type="file"] {
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 2px dashed #d1eeee;
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    background-color: #f0ffff;
+}
+
+/* Image Preview */
+.image-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid #d1eeee;
+    margin-top: 10px;
+}
+
+/* Section Headers */
+h2, h3 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    border-left: 5px solid #d1eeee;
+    padding-left: 15px;
+}
+
+/* Stats Cards */
+.stats-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.stats-card .stats-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.stats-card .stats-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Status Indicators */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-badge.active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .overflow-y-auto {
+        height: auto;
+        overflow-y: visible;
+    }
+    
+    .table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .stats-card {
+        margin-bottom: 15px;
+    }
 }

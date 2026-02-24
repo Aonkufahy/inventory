@@ -26,6 +26,7 @@ public class Product {
 
     // ADD THIS FIELD
     private String imageUrl;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

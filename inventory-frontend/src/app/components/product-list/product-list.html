@@ -1,3 +1,4 @@
+<!-- src/app/product-list/product-list.html -->
 <h2>Product List</h2>
 <div class="mb-3">
   <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search products" (input)="onSearch()">
@@ -5,10 +6,18 @@
 <div class="row">
   <div class="col-md-4" *ngFor="let product of products">
     <div class="card">
+      <!-- Product Image - Using placehold.co instead of via.placeholder.com -->
+      <!-- src/app/product-list/product-list.html - ONLY CHANGE THE PLACEHOLDER URL -->
+<img 
+  [src]="product.imageUrl || 'https://placehold.co/300x200?text=No+Image'" 
+  [alt]="product.name"
+  class="product-image"
+>
+<!-- Changed from via.placeholder.com to placehold.co -->
       <div class="card-body">
         <h5>{{ product.name }}</h5>
         <p>{{ product.description }}</p>
-        <p>Price: ${{ product.price }}</p>
+        <p class="text-success fw-bold">\${{ product.price }}</p>
         <p>Quantity: {{ product.quantity }}</p>
         <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button>
         <button *ngIf="authService.isAdmin()" class="btn btn-warning ms-2" [routerLink]="['/products/edit', product.id!]">Edit</button>

@@ -1,10 +1,58 @@
-<h2>Checkout</h2>
-<div *ngIf="cart$ | async as cart">
-  <ul>
-    <li *ngFor="let item of cart.items">{{ item.product.name }} - Quantity: {{ item.quantity }} - ${{ item.product.price * item.quantity }}</li>
-  </ul>
-  <p>Total: ${{ total }}</p>
-  <button class="btn btn-outline-danger" (click)="clearCart()">Clear Cart</button>
-  <button class="btn btn-success" (click)="placeOrder()" [disabled]="isPlacingOrder || cart.items.length === 0">Place Order</button>
-  <button class="btn btn-secondary ms-2" (click)="goBack()">Back to Products</button>
+<div class="checkout-container">
+  <h2>
+    <i class="bi bi-credit-card me-2"></i>
+    Checkout
+  </h2>
+  
+  <div *ngIf="cart$ | async as cart">
+    <!-- Empty Cart State -->
+    <div *ngIf="cart.items.length === 0" class="empty-cart-message">
+      <i class="bi bi-cart-x"></i>
+      <p>Your cart is empty</p>
+      <button class="go-back-btn" (click)="goBack()">
+        <i class="bi bi-arrow-left me-2"></i>Back to Products
+      </button>
+    </div>
+    
+    <!-- Checkout Summary -->
+    <div *ngIf="cart.items.length > 0" class="checkout-summary">
+      <div class="checkout-items-list">
+        <div *ngFor="let item of cart.items" class="checkout-item">
+          <div class="checkout-item-info">
+            <div class="checkout-item-name">{{ item.product.name }}</div>
+            <div class="checkout-item-details">
+              Quantity: {{ item.quantity }} × \${{ item.product.price }}
+            </div>
+          </div>
+          <div class="checkout-item-price">
+            \${{ item.product.price * item.quantity }}
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkout-total">
+        <span>Total:</span> \${{ total }}
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="checkout-actions">
+        <button class="btn-clear-cart" (click)="clearCart()" [disabled]="isPlacingOrder">
+          <i class="bi bi-trash me-2"></i>Clear Cart
+        </button>
+        
+        <button class="place-order-btn" (click)="placeOrder()" 
+                [disabled]="isPlacingOrder || cart.items.length === 0">
+          <span *ngIf="isPlacingOrder" class="spinner"></span>
+          <span *ngIf="!isPlacingOrder">
+            <i class="bi bi-check-circle me-2"></i>Place Order
+          </span>
+          <span *ngIf="isPlacingOrder">Processing...</span>
+        </button>
+        
+        <button class="go-back-btn" (click)="goBack()" [disabled]="isPlacingOrder">
+          <i class="bi bi-arrow-left me-2"></i>Back
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
